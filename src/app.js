@@ -19,7 +19,10 @@ app.get("PATCH/api/v1/products/:id",(req,res)=>{
     }
     products[index].quantity-=1;
     fs.writeFileSync(`${__dirname}/data/product.json`,JSON.stringify(products));
-    res.status(200).json(products[index]);
+    res.status(200).json({
+        message: `Thank you for purchasing Product ${_id}`,
+        product:products[index],
+    });
 });
 // Middlewares
 app.use(express.json());
