@@ -12,10 +12,10 @@ app.get("PATCH/api/v1/products/:id",(req,res)=>{
     const _id=req.params.id;
     const index=products.findIndex(({id})=>id===_id);
     if(index===-1){
-        res.status(404).json({msg:"product id not found"});
+        res.status(404).json({message: "Product not found!"});
     }
     if(products[index].quantity===0){
-        res.status(404).json({msg:"product quantity is 0"});
+        res.status(404).json({message: `Product ${_id}, Out of stock!`});
     }
     products[index].quantity-=1;
     fs.writeFileSync(`${__dirname}/data/product.json`,JSON.stringify(products));
